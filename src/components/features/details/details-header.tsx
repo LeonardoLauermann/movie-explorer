@@ -18,7 +18,7 @@ export function DetailsHeader({ title, release_date, runtime, genres, vote_avara
             <div className='flex flex-wrap items-center justify-between mb-6'>
                 <DetailsInfoMedia title={title} release_date={release_date} runtime={runtime} serie={serie} />
                 <div className='flex flex-wrap items-center gap-4'>
-                    <div className='flex gap-2'>
+                    <div className='flex  flex-wrap gap-2'>
                         {genres.map(genero => (
                             <BadgedGenre key={genero.id} title={genero.name} />
                         ))}
