@@ -4,6 +4,7 @@ import Image from 'next/image';
 import { Menu } from 'lucide-react';
 import { useNavigation } from '@/context/NavigationContext';
 import { SearchBar } from '../features/search-bar';
+import { Suspense } from 'react';
 
 export function Header() {
   const { toggleSidebar } = useNavigation();
@@ -17,7 +18,9 @@ export function Header() {
       </button>
 
       <div className='flex-1 max-w-222.25'>
-        <SearchBar />
+        <Suspense fallback={null}>
+          <SearchBar />
+        </Suspense>
       </div>
 
       <div className='relative w-10 h-10 md:w-12 md:h-12 rounded-full overflow-hidden border-2 border-transparent hover:border-green-500 transition-all cursor-pointer'>
