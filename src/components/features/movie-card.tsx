@@ -14,7 +14,7 @@ export function MovieCard({item}: MovieCardProps) {
     <Link
       href={`/${basePath}/${item.id}`}
       className='block relative group cursor-pointer min-w-40 md:min-w-50 transition-all'>
-      <div className='relative aspect-2/3 overflow-hidden rounded-lg'>
+      <div className='relative aspect-2/3 overflow-hidden rounded-2xl'>
         <Image
           src={imageUrl(item.poster_path)}
           alt={title}

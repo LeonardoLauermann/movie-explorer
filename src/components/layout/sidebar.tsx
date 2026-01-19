@@ -39,12 +39,15 @@ export function Sidebar({ genres }: SidebarProps) {
         border-r border-white/10 flex flex-col
       `}>
         <div className='p-6 md:p-0 flex justify-between md:justify-center md:mb-19 md:mt-16'>
-          <Image
-            src='/mbcplay.svg'
-            alt='MBCPLAY'
-            width={106}
-            height={36}
-          />
+          <Link href={"/"}>
+            <Image
+              src='/mbcplay.svg'
+              alt='MBCPLAY'
+              width={106}
+              height={36}
+            />
+          </Link>
+ 
           <button
             className='md:hidden'
             onClick={closeSidebar}>
@@ -81,7 +84,7 @@ export function Sidebar({ genres }: SidebarProps) {
             </ul>
           </div>
 
-          <div className='flex-1 overflow-y-auto min-h-0 pb-4 custom-scrollbar'>
+          <div className='flex-1 px-4 overflow-y-auto min-h-0 pb-4 custom-scrollbar'>
             <p className='text-lg text-[#666666] font-semibold px-2 mb-3'>
               Categorias
             </p>

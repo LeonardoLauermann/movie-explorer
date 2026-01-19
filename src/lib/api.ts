@@ -10,7 +10,7 @@ interface FetchOptions extends RequestInit {
 
 export const imageUrl = (path: string | null) => {
   if (!path) {
-    return '/page-not-found.png'
+    return '/no-image.png'
   }
 
   return `${IMAGE_BASE_URL}${path}`;
