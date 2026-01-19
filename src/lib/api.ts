@@ -1,3 +1,5 @@
+import { GenreResponse } from '@/types/tmdb';
+
 const BASE_URL = process.env.NEXT_PUBLIC_TMDB_BASE_URL;
 const API_KEY = process.env.NEXT_PUBLIC_TMDB_API_KEY;
 const IMAGE_BASE_URL = process.env.NEXT_PUBLIC_TMDB_IMAGE_URL;
@@ -45,10 +47,21 @@ export async function fetchClient<T = unknown>(endpoint: string, {params, ...cus
       throw new Error(`Erro na requisição: ${response.status} - ${errorMessage}`);
     }
     const data = await response.json();
-    console.log(data)
     return data as T;
   } catch (error) {
     console.error('API Error:', error);
     throw error;
   }
+}
+
+export async function getMovieGenres() {
+  const data = await fetchClient<GenreResponse>(
+    '/genre/movie/list',
+    {
+      params: { language: 'pt-BR' },
+      next: { revalidate: 86400 },
+    }
+  );
+
+  return data.genres;
 }

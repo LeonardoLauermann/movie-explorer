@@ -8,7 +8,7 @@ export function SearchBar() {
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const queryFromUrl = searchParams.get('nome') || '';
+  const queryFromUrl = searchParams.get('name') || '';
 
   const [term, setTerm] = useState(queryFromUrl);
   const [prevPathname, setPrevPathname] = useState(pathname);
@@ -26,7 +26,7 @@ export function SearchBar() {
     if (term === queryFromUrl) return;
 
     if (term.trim()) {
-      router.push(`/search?nome=${encodeURIComponent(term)}`);
+      router.push(`/search?name=${encodeURIComponent(term)}`);
     } else if (pathname === '/search' && !term && queryFromUrl) {
       router.push('/');
     }

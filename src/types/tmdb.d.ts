@@ -183,6 +183,13 @@ export interface Season {
   vote_average: number;
 }
 
+export interface Genre {
+  id: number;
+  name: string;
+}
 
+interface GenreResponse {
+  genres: Genre[];
+}
 
 export type MediaItem = Movie & TvShow;

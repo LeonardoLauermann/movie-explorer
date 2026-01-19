@@ -1,21 +1,27 @@
 'use client';
 
+import { usePathname } from 'next/navigation';
 import Link from 'next/link';
-import {useNavigation} from '@/context/NavigationContext';
-import {X, Compass, Film, TvMinimalPlay} from 'lucide-react';
 import Image from 'next/image';
 
+import { X, Compass, Film, TvMinimalPlay } from 'lucide-react';
+
+import { useNavigation } from '@/context/NavigationContext';
+import { Genre } from '@/types/tmdb';
 
 const menuItems = [
-  {name: 'Explorar', icon: Compass, href: '/'},
-  {name: 'Filmes', icon: Film, href: '/movies'},
-  {name: 'Séries', icon: TvMinimalPlay, href: '/series'},
+  { name: 'Explorar', icon: Compass, href: '/' },
+  { name: 'Filmes', icon: Film, href: '/movies' },
+  { name: 'Séries', icon: TvMinimalPlay, href: '/series' },
 ];
 
-const categories = ['Ação', 'Horror', 'Aventura', 'Animação', 'Crime', 'Documentário'];
+interface SidebarProps {
+  genres: Genre[];
+}
 
-export function Sidebar() {
-  const {isSidebarOpen, closeSidebar} = useNavigation();
+export function Sidebar({ genres }: SidebarProps) {
+  const { isSidebarOpen, closeSidebar } = useNavigation();
+  const pathname = usePathname();
 
   return (
     <>
@@ -46,29 +52,55 @@ export function Sidebar() {
           </button>
         </div>
 
-        <nav className='flex-1 overflow-y-auto px-4 '>
-          <div className='mb-8'>
+        <nav className='flex-1 px-4 flex flex-col min-h-0'>
+          <div className='mb-8 shrink-0'>
             <ul className='space-y-1'>
-              {menuItems.map(item => (
-                <li key={item.name}>
-                  <Link
-                    href={item.href}
-                    onClick={closeSidebar}
-                    className='flex items-center gap-3 px-3 py-2 rounded-lg hover:bg-white/5 transition-colors text-[#666666] hover:text-white'>
-                    <item.icon className='w-5 h-5' />
-                    <span className='text-sm font-medium'>{item.name}</span>
-                  </Link>
-                </li>
-              ))}
+              {menuItems.map((item) => {
+                const isActive = item.href === '/'
+                  ? pathname === '/'
+                  : pathname.startsWith(item.href);
+
+                return (
+                  <li key={item.name} className="relative px-3">
+                    {isActive && (<div className="absolute -right-1  w-1 h-8 bg-white" />)}
+                    <Link
+                      href={item.href}
+                      onClick={closeSidebar}
+                      className={`flex items-center gap-3 px-3 py-2 rounded-lg transition-all
+                        ${isActive
+                          ? 'text-white font-semibold'
+                          : 'text-[#666666] hover:text-white hover:bg-white/5'
+                        }`}
+                    >
+                      <item.icon className={`w-5 h-5 ${isActive ? 'text-white' : 'text-[#666666]'}`} />
+                      <span className='text-sm font-medium'>{item.name}</span>
+                    </Link>
+                  </li>
+                );
+              })}
             </ul>
           </div>
 
-          <div>
-            <p className='text-lg text-[#666666] font-semibold px-2 mb-3'>Categorias</p>
-            <ul>
-              {categories.map(cat => (
-                <li key={cat}>
-                  <button className='w-full text-left px-3 py-1 text-sm text-[#666666] hover:text-white hover:bg-white/5 rounded-lg transition-all'>{cat}</button>
+          <div className='flex-1 overflow-y-auto min-h-0 pb-4 custom-scrollbar'>
+            <p className='text-lg text-[#666666] font-semibold px-2 mb-3'>
+              Categorias
+            </p>
+
+            <ul className='space-y-1'>
+              {genres.map(genre => (
+                <li key={genre.id}>
+                  <Link
+                    href={{
+                      pathname: '/search',
+                      query: { genre: genre.id },
+                    }}
+                    onClick={closeSidebar}
+                    className='block px-3 py-1 text-sm text-[#666666]
+                               hover:text-white hover:bg-white/5
+                               rounded-lg transition-all'
+                  >
+                    {genre.name}
+                  </Link>
                 </li>
               ))}
             </ul>

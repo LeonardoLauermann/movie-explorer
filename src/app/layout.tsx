@@ -7,16 +7,19 @@ import QueryProvider from '@/providers/QueryProvider';
 
 import { Sidebar } from '@/components/layout/sidebar';
 import { Header } from '@/components/layout/header';
+import { getMovieGenres } from '@/lib/api';
 
 
-export default function RootLayout({children}: {children: React.ReactNode}) {
+export default async function RootLayout({children}: {children: React.ReactNode}) {
+  const genres = await getMovieGenres();
+  
 return (
   <html lang='pt-BR'>
     <body>
       <QueryProvider>
         <NavigationProvider>
           <div className='min-h-screen bg-[#191919]'>
-            <Sidebar />
+            <Sidebar genres={genres} />
 
             <div className='flex-1 flex flex-col md:ml-64'>
               <header className='p-4 md:p-8 md:pb-0'>
