@@ -6,6 +6,10 @@ interface SearchPageProps {
   searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }
 
+export const metadata = {
+  title: "MBCPlay - Pesquisa"
+};
+
 export default async function SearchPage({ searchParams }: SearchPageProps) {
   const params = await searchParams;
 

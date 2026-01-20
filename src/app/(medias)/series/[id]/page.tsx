@@ -5,9 +5,27 @@ import { DetailsPlayer } from '@/components/features/details/details-player';
 import { fetchClient } from '@/lib/api';
 import { MovieCredits, TvShowDetails } from '@/types/tmdb';
 import { notFound } from 'next/navigation';
+import { cache } from 'react';
 
 interface TvShowDetailsProps {
   params: Promise<{ id: string }>;
+}
+
+const getTvShowDetails = cache(async (id: string) => {
+  return fetchClient<TvShowDetails>(`/tv/${id}`);
+});
+
+const getTvShowCredits = cache(async (id: string) => {
+  return fetchClient<MovieCredits>(`/tv/${id}/credits`);
+});
+
+export async function generateMetadata({ params }: TvShowDetailsProps) {
+  const { id } = await params;
+  const series = await getTvShowDetails(id);
+
+  return {
+    title: `MBCPlay - ${series.name}`,
+  };
 }
 
 export default async function TvShowDetailsPage({ params }: TvShowDetailsProps) {
@@ -17,8 +35,8 @@ export default async function TvShowDetailsPage({ params }: TvShowDetailsProps) 
 
   try {
     const [series, credits] = await Promise.all([
-      fetchClient<TvShowDetails>(`/tv/${id}`),
-      fetchClient<MovieCredits>(`/tv/${id}/credits`)
+      getTvShowDetails(id),
+      getTvShowCredits(id)
     ]);
 
     data = { series, credits };
@@ -30,6 +48,11 @@ export default async function TvShowDetailsPage({ params }: TvShowDetailsProps) 
   const { series, credits } = data;
 
   const cast = credits.cast
+    .slice(0, 5)
+    .map(c => c.name)
+    .join(', ');
+
+  const crew = credits.crew
     .slice(0, 5)
     .map(c => c.name)
     .join(', ');
@@ -54,6 +77,7 @@ export default async function TvShowDetailsPage({ params }: TvShowDetailsProps) 
       <hr className='border-white/5 mb-4' />
 
       <div className='space-y-4'>
+        <DetailsPerson title='Equipe' content={crew || 'Informação indisponível'} />
         <DetailsPerson title='Elenco' content={cast || 'Informação indisponível'} />
       </div>
     </main>

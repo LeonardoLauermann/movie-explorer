@@ -2,6 +2,10 @@ import {MovieRow} from '@/components/features/movie-row';
 import {fetchClient} from '@/lib/api';
 import {Movie, PaginatedResponse} from '@/types/tmdb';
 
+export const metadata = {
+  title: "MBCPlay - Filmes"
+};
+
 export default async function Page() {
   const popularData = await fetchClient<PaginatedResponse<Movie>>('/movie/popular');
   const upcomingData = await fetchClient<PaginatedResponse<Movie>>('/movie/upcoming');
