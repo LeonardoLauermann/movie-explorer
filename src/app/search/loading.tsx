@@ -1,4 +1,4 @@
-import {MovieCardSkeleton} from '@/components/features/movie-card-skeleton';
+import { MovieCardSkeleton } from '@/components/features/movie/movie-card-skeleton';
 
 export default function Loading() {
   return (

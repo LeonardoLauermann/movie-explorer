@@ -1,4 +1,4 @@
-import { MovieCard } from '@/components/features/movie-card';
+import { MovieCard } from '@/components/features/movie/movie-card';
 import { fetchClient } from '@/lib/api';
 import { Movie, TvShow, PaginatedResponse } from '@/types/tmdb';
 

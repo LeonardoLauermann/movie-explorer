@@ -85,7 +85,7 @@ export function Sidebar({ genres }: SidebarProps) {
           </div>
 
           <div className='flex-1 px-4 overflow-y-auto min-h-0 pb-4 custom-scrollbar'>
-            <p className='text-lg text-[#666666] font-semibold px-2 mb-3'>
+            <p className='text-md text-[#6C6C6C] font-light px-2 mb-3'>
               Categorias
             </p>
 
@@ -98,7 +98,7 @@ export function Sidebar({ genres }: SidebarProps) {
                       query: { genre: genre.id },
                     }}
                     onClick={closeSidebar}
-                    className='block px-3 py-1 text-sm text-[#666666]
+                    className='block px-3 py-1 text-sm text-[#888888]
                                hover:text-white hover:bg-white/5
                                rounded-lg transition-all'
                   >

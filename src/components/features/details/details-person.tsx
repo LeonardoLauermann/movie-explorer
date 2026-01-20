@@ -7,8 +7,8 @@ interface DetailsPersonProps {
 export function DetailsPerson({ title, content }: DetailsPersonProps) {
     return (
         <section>
-            <h3 className='text-white font-bold text-lg mb-1'>{title}</h3>
-            <p className='text-gray-400 font-medium leading-relaxed'>{content}</p>
+            <h3 className='text-white font-bold text-xl mb-1'>{title}</h3>
+            <p className='text-white font-normal text-xl'>{content}</p>
         </section>
     );
 }

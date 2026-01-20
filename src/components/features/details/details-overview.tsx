@@ -5,6 +5,6 @@ interface DetailsOverviewProps {
 
 export function DetailsOverview({ overview }: DetailsOverviewProps) {
     return (
-        <p className='text-gray-400 text-lg leading-relaxed italic md:not-italic'>{overview || 'Nenhuma sinopse disponível em português.'}</p>
+        <p className='text-[#E8E8E8] text-lg font-normal'>{overview || 'Nenhuma sinopse disponível em português.'}</p>
     );
 }

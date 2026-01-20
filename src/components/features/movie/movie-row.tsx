@@ -18,7 +18,7 @@ export function MovieRow({title, items}: MovieRowProps) {
 
   return (
     <div className='mb-8'>
-      <h2 className='text-xl font-bold mb-4 px-4 md:px-0 text-white'>{title}</h2>
+      <h2 className='text-xl font-semibold mb-4 px-4 md:px-0 text-white'>{title}</h2>
 
       <div
         className='overflow-hidden cursor-grab active:cursor-grabbing'

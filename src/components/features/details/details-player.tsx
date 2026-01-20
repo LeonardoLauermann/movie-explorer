@@ -10,7 +10,7 @@ interface DetailsPlayerProps {
 
 export function DetailsPlayer({ alt, backdrop_path }: DetailsPlayerProps) {
     return (
-        <div className='relative w-full aspect-video md:aspect-8/2 rounded-3xl overflow-hidden mb-8 group shadow-2xl hover:cursor-pointer'>
+        <div className='relative w-full aspect-video max-h-82.5 rounded-3xl overflow-hidden mb-8 group shadow-2xl hover:cursor-pointer'>
             <Image
                 src={imageUrl(backdrop_path)}
                 alt={alt}

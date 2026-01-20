@@ -1,4 +1,4 @@
-import {MovieRow} from '@/components/features/movie-row';
+import {MovieRow} from '@/components/features/movie/movie-row';
 import {fetchClient} from '@/lib/api';
 import {PaginatedResponse, TvShow} from '@/types/tmdb';
 
