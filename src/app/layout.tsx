@@ -26,7 +26,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       <body className={`custom-scrollbar ${poppins.className}`}>
         <QueryProvider>
           <NavigationProvider>
-            <div className='min-h-screen bg-[#191919]'>
+            <div className='min-h-screen'>
               <Sidebar genres={genres} />
 
               <div className='flex-1 flex flex-col md:ml-64'>
